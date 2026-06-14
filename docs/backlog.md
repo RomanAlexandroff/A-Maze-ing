@@ -5,6 +5,7 @@
 This file is a simple replacement of a project management tool like Jira, that would be an overkill in such a small project.
 This is the place where we take our tasks from. We work on them, we finish them and we come back here to get a new task.
 
+<br>
 
 ## Global Definition of Done
 
@@ -20,32 +21,34 @@ Every task is considered finished only when:
 
 <br>
 
-# List of Development Phases in Recommended Execution Order
+## List of Development Phases in Recommended Execution Order
 
 ```text
-001–004   Project foundation
-005–007   Core types and errors
-008–011   Config parser and validator
-012–018   Reusable generator basics
-019–020   42 pattern
-021–024   Maze validation
-025–026   Solver
-027–029   Output writer
-030–033   Visual representation
-034–035   Full integration
-036–040   Tests
-041–042   Reusable package build
-043–045   Documentation
-046–048   Final evaluation hardening
-049–050   Bonuses only if time remains
+001–004     Phase 0:  Project foundation
+005–007     Phase 1:  Core types and errors
+008–011     Phase 2:  Config parser and validator
+012–018     Phase 3:  Reusable generator basics
+019–020     Phase 4:  42 pattern
+021–024     Phase 5:  Maze validation
+025–026     Phase 6:  Solver
+027–029     Phase 7:  Output writer
+030–033     Phase 8:  Visual representation
+034–035     Phase 9:  Full integration
+036–040     Phase 10: Tests
+041–042     Phase 11: Reusable package build
+043–045     Phase 12: Documentation
+046–048     Phase 13: Final evaluation hardening
+049–050     Phase 14: Bonuses — only if time remains
 ```
----
+
 
 <br>
 
 # Phase 0 — Project Foundation
 
-## - [ ] Taken - [ ] Done — Task 001: Confirm architecture and team workflow
+## Task 001: Confirm architecture and team workflow
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Agree on the project architecture before writing feature code.
@@ -78,7 +81,9 @@ config file → config object → maze generator → solver → output file → 
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 002: Create minimal executable entry point
+## Task 002: Create minimal executable entry point
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Prepare the required root-level executable file.
@@ -102,7 +107,9 @@ python3 a_maze_ing.py config.txt
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 003: Implement mandatory Makefile rules
+## Task 003: Implement mandatory Makefile rules
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Satisfy the Makefile requirements from the subject.
@@ -129,7 +136,9 @@ The subject also recommends optional `lint-strict`.
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 004: Prepare default configuration file
+## Task 004: Prepare default configuration file
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Provide the default config required by the subject.
@@ -160,7 +169,9 @@ The subject requires a default configuration file in the repository and allows a
 
 # Phase 1 — Core Types and Data Model
 
-## - [ ] Taken - [ ] Done — Task 005: Define wall bit constants
+## Task 005: Define wall bit constants
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Create one authoritative representation of maze walls.
@@ -183,7 +194,9 @@ The output format requires one hexadecimal digit per cell, where bits represent 
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 006: Define coordinate and maze types
+## Task 006: Define coordinate and maze types
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Make the codebase type-safe and easy to reason about.
@@ -210,7 +223,9 @@ MazeGrid = list[list[int]]
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 007: Create project-specific exceptions
+## Task 007: Create project-specific exceptions
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Handle errors gracefully without random crashes.
@@ -238,7 +253,9 @@ The subject states that invalid configuration, file not found, bad syntax, impos
 
 # Phase 2 — Configuration Parser and Validator
 
-## - [ ] Taken - [ ] Done — Task 008: Implement raw config file loader
+## Task 008: Implement raw config file loader
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Read config files safely.
@@ -255,7 +272,9 @@ Implement a loader that opens the config file using a context manager and return
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 009: Implement `KEY=VALUE` parser
+## Task 009: Implement `KEY=VALUE` parser
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Parse the subject-defined config format.
@@ -273,7 +292,9 @@ The config file must contain one `KEY=VALUE` pair per line. Lines starting with 
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 010: Implement config value conversion
+## Task 010: Implement config value conversion
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Convert raw config strings into typed Python values.
@@ -298,7 +319,9 @@ SEED         → optional str/int
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 011: Implement semantic config validation
+## Task 011: Implement semantic config validation
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Reject impossible maze parameters before generation starts.
@@ -329,7 +352,9 @@ The subject requires entry and exit to exist, be different, and be inside maze b
 
 # Phase 3 — Reusable Maze Generator Package
 
-## - [ ] Taken - [ ] Done — Task 012: Design public `MazeGenerator` API
+## Task 012: Design public `MazeGenerator` API
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Create the reusable generator class required by the subject.
@@ -348,7 +373,9 @@ The subject requires maze generation to be implemented as a unique class, such a
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 013: Initialize a fully-walled maze grid
+## Task 013: Initialize a fully-walled maze grid
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Create the starting maze matrix.
@@ -364,7 +391,9 @@ Generate a `height × width` matrix where every cell initially has all four wall
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 014: Implement wall coherence helpers
+## Task 014: Implement wall coherence helpers
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Guarantee that neighboring cells agree about shared walls.
@@ -386,7 +415,9 @@ The subject explicitly forbids incoherent walls, such as one cell having an east
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 015: Implement deterministic random seed handling
+## Task 015: Implement deterministic random seed handling
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Make maze generation reproducible.
@@ -403,7 +434,9 @@ The subject requires random generation but also reproducibility via a seed.
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 016: Implement perfect maze generation
+## Task 016: Implement perfect maze generation
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Generate a valid perfect maze.
@@ -421,7 +454,9 @@ The subject says that when `PERFECT=True`, the maze must contain exactly one pat
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 017: Implement non-perfect maze mode
+## Task 017: Implement non-perfect maze mode
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Support `PERFECT=False`.
@@ -439,7 +474,9 @@ After generating a valid base maze, optionally remove additional walls to create
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 018: Implement external border protection
+## Task 018: Implement external border protection
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Ensure outside borders remain closed.
@@ -461,7 +498,9 @@ The subject states that because entry and exit are specific cells, external bord
 
 # Phase 4 — “42” Pattern
 
-## - [ ] Taken - [ ] Done — Task 019: Define the “42” pattern representation
+## Task 019: Define the “42” pattern representation
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Create a clean internal representation for fully closed “42” cells.
@@ -478,7 +517,9 @@ The subject requires the visual maze to contain a visible “42” drawn by seve
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 020: Place the “42” pattern into the maze
+## Task 020: Place the “42” pattern into the maze
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Embed the pattern without breaking the maze.
@@ -499,7 +540,9 @@ Place the pattern in a reasonable location, preferably centered. Pattern cells s
 
 # Phase 5 — Maze Validation
 
-## - [ ] Taken - [ ] Done — Task 021: Implement wall-coherence validator
+## Task 021: Implement wall-coherence validator
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Validate the generated maze before exporting.
@@ -516,7 +559,9 @@ Create a validator that scans every neighboring cell pair and confirms shared wa
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 022: Implement connectivity validator
+## Task 022: Implement connectivity validator
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Guarantee there are no isolated cells except valid pattern cells.
@@ -533,7 +578,9 @@ The subject requires full connectivity and no isolated cells, except the “42�
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 023: Implement large-open-area validator
+## Task 023: Implement large-open-area validator
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Prevent forbidden open areas.
@@ -550,7 +597,9 @@ The subject says corridors cannot be wider than 2 cells. A `2x3` or `3x2` open a
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 024: Implement final maze validation pipeline
+## Task 024: Implement final maze validation pipeline
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Run all validators in one place.
@@ -579,7 +628,9 @@ perfect-mode path uniqueness
 
 # Phase 6 — Maze Solver
 
-## - [ ] Taken - [ ] Done — Task 025: Implement BFS shortest-path solver
+## Task 025: Implement BFS shortest-path solver
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Find the shortest valid path from entry to exit.
@@ -598,7 +649,9 @@ The output file must include the shortest valid path from entry to exit using `N
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 026: Implement path uniqueness check for perfect mode
+## Task 026: Implement path uniqueness check for perfect mode
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Prove that perfect mode satisfies the subject.
@@ -618,7 +671,9 @@ Create a validation helper that confirms there is exactly one path between entry
 
 # Phase 7 — Output File Writer
 
-## - [ ] Taken - [ ] Done — Task 027: Implement hexadecimal maze export
+## Task 027: Implement hexadecimal maze export
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Write the maze matrix in the required file format.
@@ -636,7 +691,9 @@ Each cell must be written as one hexadecimal digit. Cells are stored row by row,
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 028: Export entry, exit, and solution path
+## Task 028: Export entry, exit, and solution path
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Complete the required output file format.
@@ -661,7 +718,9 @@ The subject requires these three elements after an empty line.
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 029: Add output-file error handling
+## Task 029: Add output-file error handling
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Prevent crashes when output writing fails.
@@ -681,7 +740,9 @@ Handle invalid output paths, permission errors, and file writing errors graceful
 
 # Phase 8 — Visual Representation
 
-## - [ ] Taken - [ ] Done — Task 030: Choose and document renderer strategy
+## Task 030: Choose and document renderer strategy
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Decide whether the mandatory renderer will be terminal ASCII or MLX.
@@ -699,7 +760,9 @@ Implement terminal ASCII first because it is simpler, easier to test, and safer 
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 031: Implement static ASCII renderer
+## Task 031: Implement static ASCII renderer
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Display the maze in the terminal.
@@ -725,7 +788,9 @@ optional path overlay
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 032: Implement visual color themes
+## Task 032: Implement visual color themes
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Support changing maze wall colors.
@@ -741,7 +806,9 @@ The subject requires user interaction to change maze wall colours.
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 033: Implement interactive display controller
+## Task 033: Implement interactive display controller
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Provide required visual interactions.
@@ -768,7 +835,9 @@ change maze wall colours
 
 # Phase 9 — CLI Application Integration
 
-## - [ ] Taken - [ ] Done — Task 034: Connect full application pipeline
+## Task 034: Connect full application pipeline
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Make the whole project run end-to-end.
@@ -795,7 +864,9 @@ rendering
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 035: Add top-level error boundary
+## Task 035: Add top-level error boundary
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Prevent unexpected crashes during evaluation.
@@ -817,7 +888,9 @@ Add a clean top-level error boundary around the application. Expected project er
 
 # Phase 10 — Tests
 
-## - [ ] Taken - [ ] Done — Task 036: Add config parser tests
+## Task 036: Add config parser tests
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Protect config parsing from regressions.
@@ -832,7 +905,9 @@ Protect config parsing from regressions.
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 037: Add maze generator tests
+## Task 037: Add maze generator tests
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Verify generator correctness.
@@ -848,7 +923,9 @@ Verify generator correctness.
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 038: Add solver tests
+## Task 038: Add solver tests
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Verify shortest-path behavior.
@@ -862,7 +939,9 @@ Verify shortest-path behavior.
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 039: Add output writer tests
+## Task 039: Add output writer tests
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Verify exact Moulinette-style output.
@@ -877,7 +956,9 @@ Verify exact Moulinette-style output.
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 040: Add integration tests
+## Task 040: Add integration tests
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Test the real program behavior.
@@ -898,7 +979,9 @@ Run the full application using example config files.
 
 # Phase 11 — Reusable Package Build
 
-## - [ ] Taken - [ ] Done — Task 041: Prepare `mazegen` package source
+## Task 041: Prepare `mazegen` package source
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Make the generator installable and reusable.
@@ -915,7 +998,9 @@ The subject requires the reusable module to be available for later installation 
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 042: Build wheel or source distribution
+## Task 042: Build wheel or source distribution
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Produce the required installable package artifact.
@@ -944,7 +1029,9 @@ The subject allows both `.tar.gz` and `.whl`.
 
 # Phase 12 — Documentation
 
-## - [ ] Taken - [ ] Done — Task 043: Write required README structure
+## Task 043: Write required README structure
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Satisfy all README requirements.
@@ -969,7 +1056,9 @@ It must include Description, Instructions, Resources, config format, algorithm c
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 044: Document reusable generator usage
+## Task 044: Document reusable generator usage
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Explain how future projects can reuse the generator.
@@ -986,7 +1075,9 @@ The subject requires documentation showing how to instantiate and use the genera
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 045: Maintain project-management notes
+## Task 045: Maintain project-management notes
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Prepare the README team-management section gradually instead of at the last minute.
@@ -1013,7 +1104,9 @@ tools used
 
 # Phase 13 — Final Quality and Evaluation Readiness
 
-## - [ ] Taken - [ ] Done — Task 046: Run full mandatory quality gate
+## Task 046: Run full mandatory quality gate
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Confirm that the project satisfies mandatory technical checks.
@@ -1030,7 +1123,9 @@ Confirm that the project satisfies mandatory technical checks.
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 047: Perform manual invalid-input testing
+## Task 047: Perform manual invalid-input testing
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Make sure the project does not crash during peer evaluation.
@@ -1058,7 +1153,9 @@ too-small maze for 42 pattern
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 048: Peer-evaluation rehearsal
+## Task 048: Peer-evaluation rehearsal
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Prepare for the defense and possible live modification.
@@ -1080,7 +1177,9 @@ The subject says evaluators may ask for a small behavior change, function rewrit
 
 # Phase 14 — Optional Bonuses
 
-## - [ ] Taken - [ ] Done — Task 049: Add second maze generation algorithm
+## Task 049: Add second maze generation algorithm
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Implement a bonus feature.
@@ -1096,7 +1195,9 @@ The subject lists multiple maze generation algorithms as a possible bonus.
 
 ---
 
-## - [ ] Taken - [ ] Done — Task 050: Add generation animation
+## Task 050: Add generation animation
+- [ ] Taken
+- [ ] Done
 
 **Goal:**
 Implement optional animated rendering.
