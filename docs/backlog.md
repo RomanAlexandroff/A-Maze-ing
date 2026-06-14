@@ -46,6 +46,8 @@ Every task is considered finished only when:
 
 # Phase 0 — Project Foundation
 
+<br>
+
 ## Task 001: Confirm architecture and team workflow
 - [ ] Taken
 - [ ] Done
@@ -81,6 +83,8 @@ config file → config object → maze generator → solver → output file → 
 
 ---
 
+<br>
+
 ## Task 002: Create minimal executable entry point
 - [ ] Taken
 - [ ] Done
@@ -106,6 +110,8 @@ python3 a_maze_ing.py config.txt
 * No traceback is shown for normal user mistakes.
 
 ---
+
+<br>
 
 ## Task 003: Implement mandatory Makefile rules
 - [ ] Taken
@@ -135,6 +141,8 @@ The subject also recommends optional `lint-strict`.
 * All Makefile commands are documented in the README.
 
 ---
+
+<br>
 
 ## Task 004: Prepare default configuration file
 - [ ] Taken
@@ -169,6 +177,8 @@ The subject requires a default configuration file in the repository and allows a
 
 # Phase 1 — Core Types and Data Model
 
+<br>
+
 ## Task 005: Define wall bit constants
 - [ ] Taken
 - [ ] Done
@@ -193,6 +203,8 @@ The output format requires one hexadecimal digit per cell, where bits represent 
 * Unit tests verify the wall-bit mapping.
 
 ---
+
+<br>
 
 ## Task 006: Define coordinate and maze types
 - [ ] Taken
@@ -222,6 +234,8 @@ MazeGrid = list[list[int]]
 * Types are documented.
 
 ---
+
+<br>
 
 ## Task 007: Create project-specific exceptions
 - [ ] Taken
@@ -253,6 +267,8 @@ The subject states that invalid configuration, file not found, bad syntax, impos
 
 # Phase 2 — Configuration Parser and Validator
 
+<br>
+
 ## Task 008: Implement raw config file loader
 - [ ] Taken
 - [ ] Done
@@ -271,6 +287,8 @@ Implement a loader that opens the config file using a context manager and return
 * Unit tests cover missing and empty files.
 
 ---
+
+<br>
 
 ## Task 009: Implement `KEY=VALUE` parser
 - [ ] Taken
@@ -291,6 +309,8 @@ The config file must contain one `KEY=VALUE` pair per line. Lines starting with 
 * Tests cover comments, blank lines, malformed lines, and valid lines.
 
 ---
+
+<br>
 
 ## Task 010: Implement config value conversion
 - [ ] Taken
@@ -318,6 +338,8 @@ SEED         → optional str/int
 * Tests cover every config field.
 
 ---
+
+<br>
 
 ## Task 011: Implement semantic config validation
 - [ ] Taken
@@ -352,6 +374,8 @@ The subject requires entry and exit to exist, be different, and be inside maze b
 
 # Phase 3 — Reusable Maze Generator Package
 
+<br>
+
 ## Task 012: Design public `MazeGenerator` API
 - [ ] Taken
 - [ ] Done
@@ -373,6 +397,8 @@ The subject requires maze generation to be implemented as a unique class, such a
 
 ---
 
+<br>
+
 ## Task 013: Initialize a fully-walled maze grid
 - [ ] Taken
 - [ ] Done
@@ -390,6 +416,8 @@ Generate a `height × width` matrix where every cell initially has all four wall
 * Unit tests verify several sizes, including `1x1`, `2x2`, and rectangular mazes.
 
 ---
+
+<br>
 
 ## Task 014: Implement wall coherence helpers
 - [ ] Taken
@@ -415,6 +443,8 @@ The subject explicitly forbids incoherent walls, such as one cell having an east
 
 ---
 
+<br>
+
 ## Task 015: Implement deterministic random seed handling
 - [ ] Taken
 - [ ] Done
@@ -433,6 +463,8 @@ The subject requires random generation but also reproducibility via a seed.
 * Tests verify reproducibility.
 
 ---
+
+<br>
 
 ## Task 016: Implement perfect maze generation
 - [ ] Taken
@@ -454,6 +486,8 @@ The subject says that when `PERFECT=True`, the maze must contain exactly one pat
 
 ---
 
+<br>
+
 ## Task 017: Implement non-perfect maze mode
 - [ ] Taken
 - [ ] Done
@@ -473,6 +507,8 @@ After generating a valid base maze, optionally remove additional walls to create
 * Tests verify that non-perfect mode differs from perfect mode for the same seed, if possible.
 
 ---
+
+<br>
 
 ## Task 018: Implement external border protection
 - [ ] Taken
@@ -498,6 +534,8 @@ The subject states that because entry and exit are specific cells, external bord
 
 # Phase 4 — “42” Pattern
 
+<br>
+
 ## Task 019: Define the “42” pattern representation
 - [ ] Taken
 - [ ] Done
@@ -516,6 +554,8 @@ The subject requires the visual maze to contain a visible “42” drawn by seve
 * Pattern code is documented.
 
 ---
+
+<br>
 
 ## Task 020: Place the “42” pattern into the maze
 - [ ] Taken
@@ -540,6 +580,8 @@ Place the pattern in a reasonable location, preferably centered. Pattern cells s
 
 # Phase 5 — Maze Validation
 
+<br>
+
 ## Task 021: Implement wall-coherence validator
 - [ ] Taken
 - [ ] Done
@@ -558,6 +600,8 @@ Create a validator that scans every neighboring cell pair and confirms shared wa
 * Tests cover both valid and invalid examples.
 
 ---
+
+<br>
 
 ## Task 022: Implement connectivity validator
 - [ ] Taken
@@ -578,6 +622,8 @@ The subject requires full connectivity and no isolated cells, except the “42�
 
 ---
 
+<br>
+
 ## Task 023: Implement large-open-area validator
 - [ ] Taken
 - [ ] Done
@@ -596,6 +642,8 @@ The subject says corridors cannot be wider than 2 cells. A `2x3` or `3x2` open a
 * Tests cover both allowed and forbidden patterns.
 
 ---
+
+<br>
 
 ## Task 024: Implement final maze validation pipeline
 - [ ] Taken
@@ -628,6 +676,8 @@ perfect-mode path uniqueness
 
 # Phase 6 — Maze Solver
 
+<br>
+
 ## Task 025: Implement BFS shortest-path solver
 - [ ] Taken
 - [ ] Done
@@ -648,6 +698,8 @@ The output file must include the shortest valid path from entry to exit using `N
 * Tests verify simple known mazes.
 
 ---
+
+<br>
 
 ## Task 026: Implement path uniqueness check for perfect mode
 - [ ] Taken
@@ -671,6 +723,8 @@ Create a validation helper that confirms there is exactly one path between entry
 
 # Phase 7 — Output File Writer
 
+<br>
+
 ## Task 027: Implement hexadecimal maze export
 - [ ] Taken
 - [ ] Done
@@ -690,6 +744,8 @@ Each cell must be written as one hexadecimal digit. Cells are stored row by row,
 * Tests verify exact output for a small known maze.
 
 ---
+
+<br>
 
 ## Task 028: Export entry, exit, and solution path
 - [ ] Taken
@@ -718,6 +774,8 @@ The subject requires these three elements after an empty line.
 
 ---
 
+<br>
+
 ## Task 029: Add output-file error handling
 - [ ] Taken
 - [ ] Done
@@ -740,6 +798,8 @@ Handle invalid output paths, permission errors, and file writing errors graceful
 
 # Phase 8 — Visual Representation
 
+<br>
+
 ## Task 030: Choose and document renderer strategy
 - [ ] Taken
 - [ ] Done
@@ -759,6 +819,8 @@ Implement terminal ASCII first because it is simpler, easier to test, and safer 
 * Renderer implementation is separated from maze generation.
 
 ---
+
+<br>
 
 ## Task 031: Implement static ASCII renderer
 - [ ] Taken
@@ -788,6 +850,8 @@ optional path overlay
 
 ---
 
+<br>
+
 ## Task 032: Implement visual color themes
 - [ ] Taken
 - [ ] Done
@@ -805,6 +869,8 @@ The subject requires user interaction to change maze wall colours.
 * Terminal output remains readable without color if needed.
 
 ---
+
+<br>
 
 ## Task 033: Implement interactive display controller
 - [ ] Taken
@@ -835,6 +901,8 @@ change maze wall colours
 
 # Phase 9 — CLI Application Integration
 
+<br>
+
 ## Task 034: Connect full application pipeline
 - [ ] Taken
 - [ ] Done
@@ -864,6 +932,8 @@ rendering
 
 ---
 
+<br>
+
 ## Task 035: Add top-level error boundary
 - [ ] Taken
 - [ ] Done
@@ -888,6 +958,8 @@ Add a clean top-level error boundary around the application. Expected project er
 
 # Phase 10 — Tests
 
+<br>
+
 ## Task 036: Add config parser tests
 - [ ] Taken
 - [ ] Done
@@ -904,6 +976,8 @@ Protect config parsing from regressions.
 * Comment and blank-line tests pass.
 
 ---
+
+<br>
 
 ## Task 037: Add maze generator tests
 - [ ] Taken
@@ -923,6 +997,8 @@ Verify generator correctness.
 
 ---
 
+<br>
+
 ## Task 038: Add solver tests
 - [ ] Taken
 - [ ] Done
@@ -938,6 +1014,8 @@ Verify shortest-path behavior.
 * Solver does not walk through walls.
 
 ---
+
+<br>
 
 ## Task 039: Add output writer tests
 - [ ] Taken
@@ -955,6 +1033,8 @@ Verify exact Moulinette-style output.
 * All lines end with `\n`.
 
 ---
+
+<br>
 
 ## Task 040: Add integration tests
 - [ ] Taken
@@ -979,6 +1059,8 @@ Run the full application using example config files.
 
 # Phase 11 — Reusable Package Build
 
+<br>
+
 ## Task 041: Prepare `mazegen` package source
 - [ ] Taken
 - [ ] Done
@@ -997,6 +1079,8 @@ The subject requires the reusable module to be available for later installation 
 * Build configuration exists.
 
 ---
+
+<br>
 
 ## Task 042: Build wheel or source distribution
 - [ ] Taken
@@ -1029,6 +1113,8 @@ The subject allows both `.tar.gz` and `.whl`.
 
 # Phase 12 — Documentation
 
+<br>
+
 ## Task 043: Write required README structure
 - [ ] Taken
 - [ ] Done
@@ -1056,6 +1142,8 @@ It must include Description, Instructions, Resources, config format, algorithm c
 
 ---
 
+<br>
+
 ## Task 044: Document reusable generator usage
 - [ ] Taken
 - [ ] Done
@@ -1074,6 +1162,8 @@ The subject requires documentation showing how to instantiate and use the genera
 * Example works if copied into a Python file.
 
 ---
+
+<br>
 
 ## Task 045: Maintain project-management notes
 - [ ] Taken
@@ -1104,6 +1194,8 @@ tools used
 
 # Phase 13 — Final Quality and Evaluation Readiness
 
+<br>
+
 ## Task 046: Run full mandatory quality gate
 - [ ] Taken
 - [ ] Done
@@ -1122,6 +1214,8 @@ Confirm that the project satisfies mandatory technical checks.
 * No normal user path produces a traceback.
 
 ---
+
+<br>
 
 ## Task 047: Perform manual invalid-input testing
 - [ ] Taken
@@ -1153,6 +1247,8 @@ too-small maze for 42 pattern
 
 ---
 
+<br>
+
 ## Task 048: Peer-evaluation rehearsal
 - [ ] Taken
 - [ ] Done
@@ -1177,6 +1273,8 @@ The subject says evaluators may ask for a small behavior change, function rewrit
 
 # Phase 14 — Optional Bonuses
 
+<br>
+
 ## Task 049: Add second maze generation algorithm
 - [ ] Taken
 - [ ] Done
@@ -1194,6 +1292,8 @@ The subject lists multiple maze generation algorithms as a possible bonus.
 * README documents the algorithms and why they differ.
 
 ---
+
+<br>
 
 ## Task 050: Add generation animation
 - [ ] Taken
