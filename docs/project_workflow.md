@@ -43,10 +43,12 @@ If `git status` shows uncommitted work, either commit it, stash it, or intention
 
 <br>
 
+<br>
+
 # Typical Branches Workflow
 
 
-## Getting started with a new task and a new feature branch
+### Getting started with a new task and a new feature branch
 - You've taken a new task, now you need to create yourself a branch to work on it.
 - First, update the local Development branch because someone could have updated the remote Development branch within the last minute and you DO want to have the latest version of it
 ```bash
@@ -64,7 +66,7 @@ git push -u origin username_#xxxx_some_cool_feature
 The `-u` part connects your local feature branch with the remote feature branch. After that, while you are on this branch, a simple `git push` usually knows where to push.
 
 
-## Working on the task in progress
+### Working on the task in progress
 - You are free to work on the feature implementation. Do not forget to git commit and git push frequently.
 - While you are working on your feature, your teammate may make some Pull Requests and merge their work from their feature branches into the Dev branch. You want to make sure, that you're always working with the latest version of the code. This is why once or twice a day you need to update your local dev branch from the remote dev branch:
 ```bash
@@ -87,7 +89,7 @@ git push
 ```
 
 
-## The task is finished, Time to make a Pull Request
+### The task is finished, Time to make a Pull Request
 - Before calling it a day, update this local feature branch from the remote dev branch for the last time. This is the same process you've been doing every day before working:
 ```bash
 git checkout dev
@@ -109,7 +111,7 @@ A good Pull Request should contain:
 - a mention of known limitations or questionable implementation decisions if any.
 
 
-## Cleaning up before starting anew
+### Cleaning up before starting anew
 - When the Pull Request you created is aproved, the remote feature branch gets merged into the remote `dev` branch and usually after that gets deleted. At this point you do not need to keep the local feature branch and can freely delete it locally too:
 ```bash
 git checkout dev
@@ -117,6 +119,7 @@ git branch -d username_#xxxx_some_cool_feature
 ```
 - Now, get yourself a new task and start it all over again.
 
+<br>
 
 <br>
 
@@ -126,8 +129,7 @@ Morning:
 ```bash
 git checkout dev
 git pull origin dev
-```
-```bash
+
 git checkout username_#xxxx_some_cool_feature
 git merge dev
 ```
@@ -175,9 +177,9 @@ Repeat.
 # Situations That are out of the Typical Workflow
 
 ## Situation:
-	I have a computer that I've been working on the project on. But now I am using a computer that does not have the project Git repository locally. I want to be able to work on the project on this computer just as I do it on another computer. I have access to my GitHub account.
+I have a computer that I've been working on the project on. But now I am using a computer that does not have the project Git repository locally. I want to be able to work on the project on this computer just as I do it on another computer. I have access to my GitHub account.
 ## Desired outcome:
-	The second computer completely set up for flawless work on the project just like the first computer.
+The second computer completely set up for flawless work on the project just like the first computer.
 ## Solution:
 First, configure your Git identity:
 ```bash
@@ -207,61 +209,61 @@ git checkout -b username_#xxxx_some_cool_feature origin/username_#xxxx_some_cool
 <br>
 
 ## Situation:
-	I created a new local feature branch and pushed it to GitHub repository on the computer at work/school and now I need to get that feature branch onto my home/personal computer so I can continue working from where I stoped at work/school. I already have the project cloned onto my home/personal computer, it is only that particular feature branch that I do not have locally on the home/personal computer.
+I created a new local feature branch and pushed it to GitHub repository on the computer at work/school and now I need to get that feature branch onto my home/personal computer so I can continue working from where I stoped at work/school. I already have the project cloned onto my home/personal computer, it is only that particular feature branch that I do not have locally on the home/personal computer.
 ## Desired outcome:
-	To have a local feature branch on my home/personal computer that is a perfect copy of the local feature branch on my work/school computer so that I can continue working on it.
+To have a local feature branch on my home/personal computer that is a perfect copy of the local feature branch on my work/school computer so that I can continue working on it.
 ## Solution:
-	First, let your local Git know what is going on in the remote repository:
+First, let your local Git know what is going on in the remote repository:
 ```bash
 git fetch origin
 ```
-	Now, create a new local „username_#xxxx_new_cool_feature" branch and fill it up with everything that is contained in the remote repository „username_#xxxx_new_cool_feature" branch:
+Now, create a new local „username_#xxxx_new_cool_feature" branch and fill it up with everything that is contained in the remote repository „username_#xxxx_new_cool_feature" branch:
 ```bash
 git checkout -b username_#xxxx_new_cool_feature origin/username_#xxxx_new_cool_feature
 ```
-	The local branch name and the remote repository branch name do not have to be identical. People usually give them the same names just for convenience. The solution works equally well if you create a new feature branch on your home computer and now need it on your work/school computer.
+The local branch name and the remote repository branch name do not have to be identical. People usually give them the same names just for convenience. The solution works equally well if you create a new feature branch on your home computer and now need it on your work/school computer.
 
 <br>
 
 ## Situation:
-	I have a feature that I am working on. At some point I asked my teammate to help me. They got my feature branch from GitHub onto their computer and for a while we were working on that feature together on their computer. We did do git commit and git push from their computer frequently. How do I get everything we were working on onto my local feature branch on my computer?
+I have a feature that I am working on. At some point I asked my teammate to help me. They got my feature branch from GitHub onto their computer and for a while we were working on that feature together on their computer. We did do git commit and git push from their computer frequently. How do I get everything we were working on onto my local feature branch on my computer?
 ## Desired outcome:
-	All the work on my feature branch from the teammate's computer ends up on my computer.
+All the work on my feature branch from the teammate's computer ends up on my computer.
 ## Solution:
-	This is a super simple task. Let's say that your feature branch is called "username_#xxxx_my_cool_feature".
-	First, on your computer, make sure that you are on that feature branch:
+This is a super simple task. Let's say that your feature branch is called "username_#xxxx_my_cool_feature".
+First, on your computer, make sure that you are on that feature branch:
 ```bash
 git checkout username_#xxxx_my_cool_feature
 ```
-	Now, fetch all commits from the remote feature branch and update your local feature branch:
+Now, fetch all commits from the remote feature branch and update your local feature branch:
 ```bash
 git pull origin username_#xxxx_my_cool_feature
 ```
-	That's literally it.
+That's literally it.
 
 <br>
 
 ## Situation:
-	I accidentally made commits directly on `dev` instead of creating a feature branch.
+I accidentally made commits directly on `dev` instead of creating a feature branch.
 ## Desired outcome:
-	The work is saved on a proper feature branch, and local `dev` returns to the same state as remote `dev`.
+The work is saved on a proper feature branch, and local `dev` returns to the same state as remote `dev`.
 ## Solution:
-	Do NOT git push `dev`.
-	While you are still on `dev`, create a feature branch from your current commits:
+Do NOT git push `dev`.
+While you are still on `dev`, create a feature branch from your current commits:
 ```bash
 git checkout -b username_#xxxx_my_cool_feature
 ```
-	Push the feature branch to GitHub:
+Push the feature branch to GitHub:
 ```bash
 git push -u origin username_#xxxx_my_cool_feature
 ```
-	Now return local `dev` back to the remote `dev` state:
+Now return local `dev` back to the remote `dev` state:
 ```bash
 git checkout dev
 git fetch origin
 git reset --hard origin/dev
 ```
-	After that, switch to the feature branch and continue working on the feature branch:
+After that, switch to the feature branch and continue working on the feature branch:
 ```bash
 git checkout username_#xxxx_my_cool_feature
 ```
@@ -269,58 +271,57 @@ git checkout username_#xxxx_my_cool_feature
 <br>
 
 ## Situation:
-	My Pull Request has conflicts and GitHub says it cannot be merged automatically.
+My Pull Request has conflicts and GitHub says it cannot be merged automatically.
 ## Desired outcome:
-	The feature branch is updated with the newest `dev`, conflicts are resolved locally, and the Pull Request becomes mergeable again.
+The feature branch is updated with the newest `dev`, conflicts are resolved locally, and the Pull Request becomes mergeable again.
 ## Solution:
-	Update local `dev`:
+Update local `dev`:
 ```bash
 git checkout dev
 git pull origin dev
 ```
-	Go back to the feature branch:
+Go back to the feature branch:
 ```bash
 git checkout username_#xxxx_my_cool_feature
 ```
-	Merge `dev` into the feature branch:
+Merge `dev` into the feature branch:
 ```bash
 git merge dev
 ```
-	Resolve the conflicts in the files, then run:
+Resolve the conflicts in the files, then run:
 ```bash
 git status
 git add .
 git commit
 git push
 ```
-	After the push, GitHub should update the Pull Request automatically.
+After the push, GitHub should update the Pull Request automatically.
 
 <br>
 
 ## Situation:
-	I started working on a file, but now I need to switch branches and Git does not let me because I have local changes.
+I started working on a file, but now I need to switch branches and Git does not let me because I have local changes.
 ## Desired outcome:
-	The current unfinished work is not lost, and I can safely switch branches.
+The current unfinished work is not lost, and I can safely switch branches.
 ## Solution:
-	First check what was changed:
+First check what was changed:
 ```bash
 git status
 ```
-	If the work is meaningful, commit it:
+If the work is meaningful, commit it:
 ```bash
 git add .
 git commit -m "save current progress"
 ```
-	If the work is temporary and not ready for a commit, stash it:
+If the work is temporary and not ready for a commit, stash it:
 ```bash
 git stash
 ```
-	Then switch branches:
+Then switch branches:
 ```bash
 git checkout dev
 ```
-	Later, if you used stash and want your changes back, return to the correct branch and call:
-
+Later, if you used stash and want your changes back, return to the correct branch and call:
 ```bash
 git stash pop
 ```
