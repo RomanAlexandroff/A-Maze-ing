@@ -5,11 +5,23 @@
 ## Description
 
 
+
+
+<br>
+
 ## Instructions
 
 
+
+
+<br>
+
 ## Usage
 
+
+
+
+<br>
 
 ## Project Structure
 
@@ -18,15 +30,15 @@ a_maze_ing/
 │
 ├── .github/
 │   ├── workflows/
-│   │   └── CI.yml
+│   │   └── CI.yml					-- script to run GitHub Actions CI
 │   │
-│   ├── pull_request_template.md
-│   └── CODEOWNERS
+│   ├── pull_request_template.md	-- for Pull Requests
+│   └── CODEOWNERS					-- for Pull Requests
 │
 ├── docs/
-│   ├── backlog.md
-│   ├── project_workflow.md
-│   └── subject.pdf
+│   ├── backlog.md					-- project tasks to work on (instead of Jira)
+│   ├── project_workflow.md			-- instructions how to work with Git
+│   └── subject.pdf					-- original school project subject
 │
 ├── examples/
 │   ├── default.cfg
@@ -70,19 +82,23 @@ a_maze_ing/
 │   ├── test_solver.py
 │   └── test_export.py
 │
-├── .flake8
+├── .flake8							-- script to setup Flake8 behaviour
 ├── .gitignore
 ├── Makefile
-├── mypy.ini
+├── mypy.ini						-- script to setup MyPy behaviour
 ├── pyproject.toml
-├── README.md
-└── requirements-dev.txt
+├── README.md						-- this document
+└── requirements-dev.txt			-- for the CI jobs
 ```
+
+<br>
 
 ## Resources
 
 
 
+<br>
+
 ## AI Usage Disclosure
 
-
+- To create the initial version of the project Backlog
