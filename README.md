@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by <login0>, roaleksa.*
+*This project has been created as part of the 42 curriculum by login0, roaleksa.*
 
 # A-Maze-ing
 
@@ -77,7 +77,7 @@ a_maze_ing/
 ├── pyproject.toml
 ├── README.md
 └── requirements-dev.txt
-```text
+```
 
 ## Resources
 
