@@ -11,19 +11,18 @@ This is the place where we take our tasks from. We work on them, we finish them 
 
 Every task is considered finished only when:
 
-* `flake8 .` passes.
-* `mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs` passes.
+* **flake8 .** passes.
+* **mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs** passes.
 * Relevant tests pass.
 * Public functions/classes have type hints and docstrings.
 * No unhandled exceptions reach the user during normal invalid-input scenarios.
-* Code is merged through a Pull Request into `dev`.
+* Code is merged through a Pull Request into **dev**.
 * The developer who wrote the code can explain it during evaluation.
 
 <br>
 
 ## List of Development Phases in Recommended Execution Order
 
-```text
 001–004     Phase 0:  Project foundation
 005–007     Phase 1:  Core types and errors
 008–011     Phase 2:  Config parser and validator
@@ -39,7 +38,6 @@ Every task is considered finished only when:
 043–045     Phase 12: Documentation
 046–048     Phase 13: Final evaluation hardening
 049–050     Phase 14: Bonuses — only if time remains
-```
 
 
 <br>
@@ -57,7 +55,6 @@ Agree on the project architecture before writing feature code.
 
 **Description:**
 Create a short project planning document describing the main components:
-```text
 CLI entry point
 Config parser
 Config validator
@@ -69,16 +66,13 @@ Output writer
 Visual renderer
 Reusable mazegen package
 Tests
-```
 
 **Acceptance criteria:**
-* `docs/architecture.md` exists.
+* **docs/architecture.md** exists.
 * It explains the responsibility of each module.
 * It explains the intended data flow:
-```text
 config file → config object → maze generator → solver → output file → renderer
-```
-* It defines the branch workflow: `feature/* → dev → main`.
+* It defines the branch workflow: **feature/* → dev → main**.
 * It defines that all code must pass Flake8 and MyPy before merge.
 
 ---
@@ -94,16 +88,12 @@ Prepare the required root-level executable file.
 
 **Description:**
 Create the mandatory root file:
-```text
 a_maze_ing.py
-```
 The subject requires the program to be runnable as:
-```bash
 python3 a_maze_ing.py config.txt
-```
 
 **Acceptance criteria:**
-* `a_maze_ing.py` exists at repository root.
+* **a_maze_ing.py** exists at repository root.
 * Running it with no arguments prints a clean usage error.
 * Running it with too many arguments prints a clean usage error.
 * The file delegates real work to internal application code instead of containing all project logic.
@@ -121,23 +111,21 @@ python3 a_maze_ing.py config.txt
 Satisfy the Makefile requirements from the subject.
 
 **Description:**
-Create or update `Makefile` with these mandatory rules:
-```make
+Create or update **Makefile** with these mandatory rules:
 install
 run
 debug
 clean
 lint
-```
-The subject also recommends optional `lint-strict`.  
+The subject also recommends optional **lint-strict**.  
 
 **Acceptance criteria:**
-* `make install` installs dependencies.
-* `make run` runs `python3 a_maze_ing.py config.txt`.
-* `make debug` runs the project through `pdb`.
-* `make clean` removes Python caches and tool caches.
-* `make lint` runs exactly the required Flake8 and MyPy checks.
-* `make lint-strict` exists if the team chooses to add it.
+* **make install** installs dependencies.
+* **make run** runs **python3 a_maze_ing.py config.txt**.
+* **make debug** runs the project through **pdb**.
+* **make clean** removes Python caches and tool caches.
+* **make lint** runs exactly the required Flake8 and MyPy checks.
+* **make lint-strict** exists if the team chooses to add it.
 * All Makefile commands are documented in the README.
 
 ---
@@ -152,8 +140,7 @@ The subject also recommends optional `lint-strict`.
 Provide the default config required by the subject.
 
 **Description:**
-Create a root-level or `examples/` configuration file with all mandatory keys:
-```text
+Create a root-level or **examples/** configuration file with all mandatory keys:
 WIDTH=20
 HEIGHT=15
 ENTRY=0,0
@@ -161,14 +148,13 @@ EXIT=19,14
 OUTPUT_FILE=maze.txt
 PERFECT=True
 SEED=42
-```
 The subject requires a default configuration file in the repository and allows additional keys such as seed, algorithm, or display mode. 
 
 **Acceptance criteria:**
 * A valid default config exists.
 * It includes all mandatory keys.
 * It includes a seed for reproducible test runs.
-* `make run` works with this config.
+* **make run** works with this config.
 * Invalid example configs are later added for testing.
 
 ---
@@ -188,17 +174,15 @@ Create one authoritative representation of maze walls.
 
 **Description:**
 Implement constants or an enum for wall bits:
-```text
 North = 1
 East  = 2
 South = 4
 West  = 8
-```
 The output format requires one hexadecimal digit per cell, where bits represent closed walls. 
 
 **Acceptance criteria:**
 * Wall bits are defined in one place only.
-* Code never uses unexplained magic numbers like `1`, `2`, `4`, `8` directly.
+* Code never uses unexplained magic numbers like **1**, **2**, **4**, **8** directly.
 * Helper functions exist for checking, adding, and removing walls.
 * Unit tests verify the wall-bit mapping.
 
@@ -215,17 +199,13 @@ Make the codebase type-safe and easy to reason about.
 
 **Description:**
 Create core type aliases or dataclasses for:
-```text
 Coordinate
 MazeGrid
 MazePath
 Direction
-```
 Example:
-```python
 Coordinate = tuple[int, int]
 MazeGrid = list[list[int]]
-```
 
 **Acceptance criteria:**
 * Shared types are defined in one module.
@@ -246,13 +226,11 @@ Handle errors gracefully without random crashes.
 
 **Description:**
 Create custom exceptions such as:
-```text
 ConfigError
 MazeGenerationError
 MazeValidationError
 OutputError
 RenderError
-```
 The subject states that invalid configuration, file not found, bad syntax, impossible parameters, and similar cases must be handled gracefully with clear messages. 
 
 **Acceptance criteria:**
@@ -280,7 +258,7 @@ Read config files safely.
 Implement a loader that opens the config file using a context manager and returns raw lines.
 
 **Acceptance criteria:**
-* File reading uses `with open(...)`.
+* File reading uses **with open(...)**.
 * Missing file produces a clean error message.
 * Empty file produces a clean validation error.
 * File access errors do not crash the program.
@@ -290,7 +268,7 @@ Implement a loader that opens the config file using a context manager and return
 
 <br>
 
-## Task 009: Implement `KEY=VALUE` parser
+## Task 009: Implement **KEY=VALUE** parser
 - [ ] Taken
 - [ ] Done
 
@@ -298,12 +276,12 @@ Implement a loader that opens the config file using a context manager and return
 Parse the subject-defined config format.
 
 **Description:**
-The config file must contain one `KEY=VALUE` pair per line. Lines starting with `#` are comments and must be ignored. Mandatory keys are `WIDTH`, `HEIGHT`, `ENTRY`, `EXIT`, `OUTPUT_FILE`, and `PERFECT`. 
+The config file must contain one **KEY=VALUE** pair per line. Lines starting with **#** are comments and must be ignored. Mandatory keys are **WIDTH**, **HEIGHT**, **ENTRY**, **EXIT**, **OUTPUT_FILE**, and **PERFECT**. 
 
 **Acceptance criteria:**
 * Blank lines are ignored.
 * Comment lines are ignored.
-* `KEY=VALUE` lines are parsed correctly.
+* **KEY=VALUE** lines are parsed correctly.
 * Malformed lines produce a clear error.
 * Duplicate keys are either rejected or handled by a clearly documented rule.
 * Tests cover comments, blank lines, malformed lines, and valid lines.
@@ -321,7 +299,6 @@ Convert raw config strings into typed Python values.
 
 **Description:**
 Convert:
-```text
 WIDTH        → int
 HEIGHT       → int
 ENTRY        → tuple[int, int]
@@ -329,11 +306,10 @@ EXIT         → tuple[int, int]
 OUTPUT_FILE  → str
 PERFECT      → bool
 SEED         → optional str/int
-```
 
 **Acceptance criteria:**
-* Boolean parsing accepts only clearly documented values, for example `True` and `False`.
-* Coordinates must use `x,y` format.
+* Boolean parsing accepts only clearly documented values, for example **True** and **False**.
+* Coordinates must use **x,y** format.
 * Invalid integers, booleans, and coordinates produce clean errors.
 * Tests cover every config field.
 
@@ -350,14 +326,12 @@ Reject impossible maze parameters before generation starts.
 
 **Description:**
 Validate:
-```text
 width > 0
 height > 0
 entry inside bounds
 exit inside bounds
 entry != exit
 output file name is not empty
-```
 The subject requires entry and exit to exist, be different, and be inside maze bounds. 
 
 **Acceptance criteria:**
@@ -376,7 +350,7 @@ The subject requires entry and exit to exist, be different, and be inside maze b
 
 <br>
 
-## Task 012: Design public `MazeGenerator` API
+## Task 012: Design public **MazeGenerator** API
 - [ ] Taken
 - [ ] Done
 
@@ -384,10 +358,10 @@ The subject requires entry and exit to exist, be different, and be inside maze b
 Create the reusable generator class required by the subject.
 
 **Description:**
-The subject requires maze generation to be implemented as a unique class, such as `MazeGenerator`, inside a standalone module that can be imported in a future project. It must allow users to instantiate the generator, pass custom parameters, access the maze structure, and access at least one solution. 
+The subject requires maze generation to be implemented as a unique class, such as **MazeGenerator**, inside a standalone module that can be imported in a future project. It must allow users to instantiate the generator, pass custom parameters, access the maze structure, and access at least one solution. 
 
 **Acceptance criteria:**
-* A `MazeGenerator` class exists.
+* A **MazeGenerator** class exists.
 * It can be imported independently from the CLI.
 * It accepts width, height, entry, exit, perfect mode, and seed.
 * It exposes generated maze data.
@@ -407,13 +381,13 @@ The subject requires maze generation to be implemented as a unique class, such a
 Create the starting maze matrix.
 
 **Description:**
-Generate a `height × width` matrix where every cell initially has all four walls closed.
+Generate a **height × width** matrix where every cell initially has all four walls closed.
 
 **Acceptance criteria:**
 * Every cell starts with North, East, South, and West walls.
 * Matrix dimensions match config.
 * No row aliasing bug exists.
-* Unit tests verify several sizes, including `1x1`, `2x2`, and rectangular mazes.
+* Unit tests verify several sizes, including **1x1**, **2x2**, and rectangular mazes.
 
 ---
 
@@ -428,11 +402,9 @@ Guarantee that neighboring cells agree about shared walls.
 
 **Description:**
 Create helper functions such as:
-```text
 remove_wall_between(cell_a, cell_b)
 has_wall(cell, direction)
 get_neighbors(cell)
-```
 The subject explicitly forbids incoherent walls, such as one cell having an east wall while its eastern neighbor has no west wall. 
 
 **Acceptance criteria:**
@@ -475,7 +447,7 @@ Generate a valid perfect maze.
 
 **Description:**
 Implement a maze generation algorithm that creates exactly one path between cells in perfect mode. Recommended first algorithm: iterative randomized depth-first search / recursive backtracker.
-The subject says that when `PERFECT=True`, the maze must contain exactly one path between entry and exit. 
+The subject says that when **PERFECT=True**, the maze must contain exactly one path between entry and exit. 
 
 **Acceptance criteria:**
 * Perfect mode creates a connected maze.
@@ -493,13 +465,13 @@ The subject says that when `PERFECT=True`, the maze must contain exactly one pat
 - [ ] Done
 
 **Goal:**
-Support `PERFECT=False`.
+Support **PERFECT=False**.
 
 **Description:**
 After generating a valid base maze, optionally remove additional walls to create loops while preserving validity.
 
 **Acceptance criteria:**
-* `PERFECT=False` still produces a connected maze.
+* **PERFECT=False** still produces a connected maze.
 * Entry and exit remain reachable.
 * Wall coherence remains valid.
 * External border walls remain closed.
@@ -632,12 +604,12 @@ The subject requires full connectivity and no isolated cells, except the “42�
 Prevent forbidden open areas.
 
 **Description:**
-The subject says corridors cannot be wider than 2 cells. A `2x3` or `3x2` open area is allowed, but a `3x3` open area is forbidden. 
+The subject says corridors cannot be wider than 2 cells. A **2x3** or **3x2** open area is allowed, but a **3x3** open area is forbidden. 
 
 **Acceptance criteria:**
-* Validator detects forbidden `3x3` open areas.
+* Validator detects forbidden **3x3** open areas.
 * Validator allows normal corridors.
-* Validator allows permitted `2x3` or `3x2` cases.
+* Validator allows permitted **2x3** or **3x2** cases.
 * Generation either prevents or repairs invalid open areas.
 * Tests cover both allowed and forbidden patterns.
 
@@ -654,7 +626,6 @@ Run all validators in one place.
 
 **Description:**
 Create one function or class that validates:
-```text
 entry/exit validity
 wall coherence
 external borders
@@ -662,7 +633,6 @@ connectivity
 pattern correctness
 large open areas
 perfect-mode path uniqueness
-```
 
 **Acceptance criteria:**
 * Generator output is validated before export.
@@ -687,7 +657,7 @@ Find the shortest valid path from entry to exit.
 
 **Description:**
 Implement BFS over the generated maze. The solver must respect walls and return both coordinates and movement letters.
-The output file must include the shortest valid path from entry to exit using `N`, `E`, `S`, and `W`. 
+The output file must include the shortest valid path from entry to exit using **N**, **E**, **S**, and **W**. 
 
 **Acceptance criteria:**
 * Solver returns a list of coordinates.
@@ -709,7 +679,7 @@ The output file must include the shortest valid path from entry to exit using `N
 Prove that perfect mode satisfies the subject.
 
 **Description:**
-Create a validation helper that confirms there is exactly one path between entry and exit when `PERFECT=True`.
+Create a validation helper that confirms there is exactly one path between entry and exit when **PERFECT=True**.
 
 **Acceptance criteria:**
 * Perfect mazes pass uniqueness validation.
@@ -736,10 +706,10 @@ Write the maze matrix in the required file format.
 Each cell must be written as one hexadecimal digit. Cells are stored row by row, one row per line. 
 
 **Acceptance criteria:**
-* Output contains exactly `HEIGHT` maze rows.
-* Each maze row contains exactly `WIDTH` hex digits.
+* Output contains exactly **HEIGHT** maze rows.
+* Each maze row contains exactly **WIDTH** hex digits.
 * Hex digits correctly represent wall bits.
-* All output lines end with `\n`.
+* All output lines end with **\n**.
 * File writing uses a context manager.
 * Tests verify exact output for a small known maze.
 
@@ -756,20 +726,18 @@ Complete the required output file format.
 
 **Description:**
 After the maze rows, write:
-```text
 empty line
 entry coordinates
 exit coordinates
 solution path letters
-```
 The subject requires these three elements after an empty line. 
 
 **Acceptance criteria:**
 * Output contains one empty line after the maze.
-* Entry is written as `x,y`.
-* Exit is written as `x,y`.
-* Path is written as a single string of `N`, `E`, `S`, `W`.
-* Final line ends with `\n`.
+* Entry is written as **x,y**.
+* Exit is written as **x,y**.
+* Path is written as a single string of **N**, **E**, **S**, **W**.
+* Final line ends with **\n**.
 * Tests verify exact formatting.
 
 ---
@@ -814,7 +782,7 @@ The subject allows either terminal ASCII rendering or graphical MLX rendering. T
 Implement terminal ASCII first because it is simpler, easier to test, and safer for CI. Add MLX later only if time allows.
 
 **Acceptance criteria:**
-* `docs/architecture.md` states the chosen renderer.
+* **docs/architecture.md** states the chosen renderer.
 * README explains how to use it.
 * Renderer implementation is separated from maze generation.
 
@@ -831,13 +799,11 @@ Display the maze in the terminal.
 
 **Description:**
 Render:
-```text
 walls
 entry
 exit
 42 pattern
 optional path overlay
-```
 
 **Acceptance criteria:**
 * Maze walls are visually understandable.
@@ -881,11 +847,9 @@ Provide required visual interactions.
 
 **Description:**
 The subject requires interactions for:
-```text
 re-generate a new maze and display it
 show/hide a valid shortest path
 change maze wall colours
-```
 
 **Acceptance criteria:**
 * User can regenerate a maze.
@@ -912,7 +876,6 @@ Make the whole project run end-to-end.
 
 **Description:**
 Connect:
-```text
 argument parsing
 config loading
 config validation
@@ -921,10 +884,9 @@ maze validation
 solving
 output writing
 rendering
-```
 
 **Acceptance criteria:**
-* `python3 a_maze_ing.py config.txt` runs the full project.
+* **python3 a_maze_ing.py config.txt** runs the full project.
 * A valid output file is created.
 * The maze is displayed visually.
 * Invalid configs fail cleanly.
@@ -948,7 +910,7 @@ Add a clean top-level error boundary around the application. Expected project er
 * Expected errors do not show tracebacks.
 * Developer/debug mode can optionally show tracebacks.
 * Exit codes are sensible:
-  * `0` for success
+  * **0** for success
   * non-zero for user/config/runtime error
 * Tests cover CLI failure cases.
 
@@ -1030,7 +992,7 @@ Verify exact Moulinette-style output.
 * Empty line is present.
 * Entry and exit are formatted correctly.
 * Path line is correct.
-* All lines end with `\n`.
+* All lines end with **\n**.
 
 ---
 
@@ -1061,7 +1023,7 @@ Run the full application using example config files.
 
 <br>
 
-## Task 041: Prepare `mazegen` package source
+## Task 041: Prepare **mazegen** package source
 - [ ] Taken
 - [ ] Done
 
@@ -1069,11 +1031,11 @@ Run the full application using example config files.
 Make the generator installable and reusable.
 
 **Description:**
-The subject requires the reusable module to be available for later installation by `pip`, with package file named `mazegen-*` located at the root of the repository. It also requires all elements needed to rebuild the package from source. 
+The subject requires the reusable module to be available for later installation by **pip**, with package file named **mazegen-*** located at the root of the repository. It also requires all elements needed to rebuild the package from source. 
 
 **Acceptance criteria:**
-* `mazegen` source package exists.
-* `MazeGenerator` can be imported outside the main app.
+* **mazegen** source package exists.
+* **MazeGenerator** can be imported outside the main app.
 * Package does not depend on renderer or CLI.
 * Package has its own minimal documentation.
 * Build configuration exists.
@@ -1091,20 +1053,16 @@ Produce the required installable package artifact.
 
 **Description:**
 Build either:
-```text
 mazegen-<version>.tar.gz
-```
 or:
-```text
 mazegen-<version>-py3-none-any.whl
-```
-The subject allows both `.tar.gz` and `.whl`. 
+The subject allows both **.tar.gz** and **.whl**. 
 
 **Acceptance criteria:**
 * Built package file is located at repository root.
-* Package name starts with `mazegen-`.
+* Package name starts with **mazegen-**.
 * Package can be installed in a fresh virtual environment.
-* After installation, `MazeGenerator` can be imported and used.
+* After installation, **MazeGenerator** can be imported and used.
 * README explains how to rebuild the package.
 
 ---
@@ -1124,9 +1082,7 @@ Satisfy all README requirements.
 
 **Description:**
 The README must start with an italicized line:
-```markdown
 *This project has been created as part of the 42 curriculum by <login1>, <login2>.*
-```
 It must include Description, Instructions, Resources, config format, algorithm choice, why the algorithm was chosen, reusable code explanation, team roles, planning, what worked well, what could be improved, and tools used.  
 
 **Acceptance criteria:**
@@ -1174,14 +1130,12 @@ Prepare the README team-management section gradually instead of at the last minu
 
 **Description:**
 Track:
-```text
 team member roles
 initial plan
 how the plan changed
 what worked well
 what could be improved
 tools used
-```
 
 **Acceptance criteria:**
 * Notes are updated after major milestones.
@@ -1204,11 +1158,11 @@ tools used
 Confirm that the project satisfies mandatory technical checks.
 
 **Acceptance criteria:**
-* `make clean` works.
-* `make install` works in a fresh environment.
-* `make lint` passes.
-* `make run` works.
-* `python3 a_maze_ing.py config.txt` works.
+* **make clean** works.
+* **make install** works in a fresh environment.
+* **make lint** passes.
+* **make run** works.
+* **python3 a_maze_ing.py config.txt** works.
 * Output file is produced.
 * Visual display works.
 * No normal user path produces a traceback.
@@ -1225,7 +1179,6 @@ Confirm that the project satisfies mandatory technical checks.
 Make sure the project does not crash during peer evaluation.
 
 **Test cases:**
-```text
 missing config file
 empty config file
 bad KEY=VALUE syntax
@@ -1238,7 +1191,6 @@ ENTRY == EXIT
 PERFECT=banana
 unwritable output path
 too-small maze for 42 pattern
-```
 
 **Acceptance criteria:**
 * Every case produces a clear error.
