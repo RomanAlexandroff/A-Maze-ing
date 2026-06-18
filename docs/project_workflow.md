@@ -194,16 +194,16 @@ merge it into the development branch.
 Let’s imagine that your repository currently looks like this:
 
 ```text
-main                                      (the production branch)
-  |
-refactor                                  (the development branch)
-  |
-username_feature_implementation           (the feature branch)
+main                                  (the production branch)
+ |
+dev                                  (the development branch)
+ |
+username_#xxxx_some_feature_branch          (the feature branch)
 ```
 
-You have already implemented the feature, tested it and committed everything to the `username_feature_implementation` branch.
+You have already implemented the feature, tested it and committed everything to the `username_#xxxx_some_feature_branch` branch.
 
-On your computer you are currently on the `username_feature_implementation` branch.
+On your computer you are currently on the `username_#xxxx_some_feature_branch` branch.
 
 <br>
 
@@ -229,7 +229,6 @@ git commit
 ```
 
 Why?
-
 You don't want uncommitted changes floating around on your computer.
 
 <br>
@@ -241,7 +240,7 @@ A Pull Request can only be created for code that exists on GitHub, so push to Gi
 If this is the very first push after you have created the feature branch, use:
 
 ```bash
-git push -u origin username_feature_implementation
+git push -u origin username_#xxxx_some_feature_branch
 ```
 
 If not, it’s enough to use:
@@ -251,7 +250,6 @@ git push
 ```
 
 Why?
-
 GitHub cannot review code that only exists on your laptop.
 
 <br>
@@ -265,17 +263,16 @@ git fetch origin
 ```
 
 Why?
-
-Perhaps Carlotta merged something into `refactor` while you were working.
+Perhaps Carlotta merged something into `dev` while you were working.
 
 <br>
 
-### STEP 4: Check whether the refactor branch has changed
+### STEP 4: Check whether the Development branch has changed
 
 Run:
 
 ```bash
-git log --oneline HEAD..origin/refactor
+git log --oneline HEAD..origin/dev
 ```
 
 If nothing appears:
@@ -295,34 +292,34 @@ abc123 Carlotta fixed parser
 def456 Carlotta improved validation
 ```
 
-Then `refactor` changed while you were working. Go to STEP 5.
+Then `dev` changed while you were working. Go to STEP 5.
 
 <br>
 
-### STEP 5: Synchronize your local branch with the GitHub refactor branch
+### STEP 5: Synchronize your local branch with the GitHub Development branch
 
-Switch from your feature branch to the `refactor` branch:
+Switch from your feature branch to the `dev` branch:
 
 ```bash
-git checkout refactor
+git checkout dev
 ```
 
-Update the `refactor` branch:
+Update the `dev` branch:
 
 ```bash
-git pull origin refactor
+git pull origin dev
 ```
 
 Switch back to your feature branch:
 
 ```bash
-git checkout username_feature_implementation
+git checkout username_#xxxx_some_feature_branch
 ```
 
-Merge the `refactor` branch with your feature branch:
+Merge the `dev` branch with your feature branch:
 
 ```bash
-git merge refactor
+git merge dev
 ```
 
 Resolve conflicts if any appear.
@@ -342,7 +339,6 @@ git push
 ```
 
 Why?
-
 You want to know about conflicts before the Pull Request.
 Not after.
 
@@ -359,7 +355,7 @@ https://github.com/RomanAlexandroff/push_swap
 There, go to your feature branch:
 
 ```text
-username_feature_implementation
+username_#xxxx_some_feature_branch
 ```
 
 <br>
@@ -395,8 +391,8 @@ This step confuses many people, so be extra careful here.
 You will see something like:
 
 ```text
-base: refactor
-compare: username_feature_implementation
+base: dev
+compare: username_#xxxx_some_feature_branch
 ```
 
 Meaning:
@@ -404,13 +400,13 @@ Meaning:
 Take changes FROM:
 
 ```text
-username_feature_implementation
+username_#xxxx_some_feature_branch
 ```
 
 Put them INTO:
 
 ```text
-refactor
+dev
 ```
 
 Double-check this carefully.
@@ -418,8 +414,8 @@ Double-check this carefully.
 You do NOT want:
 
 ```text
-base: username_feature_implementation
-compare: refactor
+base: username_#xxxx_some_feature_branch
+compare: dev
 ```
 
 That would be backwards!!!
@@ -438,15 +434,12 @@ GitHub now shows:
 Review everything.
 
 Why?
-
 Sometimes you accidentally committed:
-
 ```text
 .vscode
 temporary.txt
 random_test_file.c
 ```
-
 This is your last chance to notice and remove unwanted files.
 
 <br>
@@ -502,7 +495,7 @@ Pull Request #7
 This is basically a discussion page.
 
 Nothing has been merged yet.
-Nothing in `refactor` changes yet.
+Nothing in `dev` changes yet.
 
 <br>
 
@@ -549,7 +542,7 @@ You DO NOT create a new Pull Request.
 Instead, on your computer, you return to your feature branch:
 
 ```bash
-git checkout username_feature_implementation
+git checkout username_#xxxx_some_feature_branch
 ```
 
 You fix the bug.
@@ -606,12 +599,12 @@ Confirm merge
 GitHub now automatically performs:
 
 ```text
-username_feature_implementation
-        ↓
-     refactor
+username_#xxxx_some_feature_branch
+      ↓
+     dev
 ```
 
-The feature is now inside `refactor`.
+The feature is now inside `dev`.
 
 <br>
 
@@ -626,9 +619,7 @@ Delete branch
 Click it.
 
 Why?
-
 The feature is finished.
-
 The feature branch has served its purpose.
 
 <br>
@@ -639,10 +630,10 @@ Super important! Now your laptop still has the old view of the world.
 
 Update it!
 
-On your computer, switch to the `refactor` branch:
+On your computer, switch to the `dev` branch:
 
 ```bash
-git checkout refactor
+git checkout dev
 ```
 
 Fetch updates from GitHub:
@@ -654,16 +645,16 @@ git fetch origin
 Update your local repository:
 
 ```bash
-git merge origin/refactor
+git merge origin/dev
 ```
 
 Or, instead of the fetch/update combination, simply call:
 
 ```bash
-git pull origin refactor
+git pull origin dev
 ```
 
-Now your local `refactor` branch contains the merged feature.
+Now your local `dev` branch contains the merged feature.
 
 Should you notify other developers on the project to synchronize their local repositories with GitHub?
 
@@ -678,7 +669,7 @@ Feature completed.
 Delete the local feature branch on your computer:
 
 ```bash
-git branch -d username_feature_implementation
+git branch -d username_#xxxx_some_feature_branch
 ```
 Why?
 Keeps your branch list clean.
@@ -710,7 +701,7 @@ parse_arguments();
 Git cannot decide which function name to keep.
 When merging:
 ```bash
-git merge refactor
+git merge dev
 ```
 Git reports conflict.
 Open file.
@@ -721,7 +712,7 @@ You'll see:
 parse_args();
 =======
 parse_arguments();
->>>>>>> refactor
+>>>>>>> dev
 ```
 Choose correct code.
 Then:
