@@ -171,6 +171,569 @@ git pull origin dev
 
 Repeat.
 
+<br>
+
+<br>
+
+# Pull Request Workflow Step by Step
+
+When you were working on some feature, you were making commits and pushes to your feature branch and now the feature is finally ready — it is time to make a Pull Request.
+
+Pull Request is a procedure to merge your feature branch into a development branch for all other developers to see.
+
+Theoretically, you absolutely could simply merge your feature branch into the development branch on your computer yourself and then push the development branch to the GitHub repository, but that would be wrong and a completely un-teamwork-like behaviour. Because in that case you would skip a very important step of getting your code reviewed by another developer.
+
+A Pull Request is a GitHub feature, not a Git feature. Think of it as:
+
+```text
+I have finished my work on my feature branch.
+Please review it and, if everything looks good,
+merge it into the development branch.
+```
+
+Let’s imagine that your repository currently looks like this:
+
+```text
+main                                      (the production branch)
+  |
+refactor                                  (the development branch)
+  |
+username_feature_implementation           (the feature branch)
+```
+
+You have already implemented the feature, tested it and committed everything to the `username_feature_implementation` branch.
+
+On your computer you are currently on the `username_feature_implementation` branch.
+
+<br>
+
+### STEP 1: Make sure your work is fully committed to your local feature branch
+
+Check:
+
+```bash
+git status
+```
+
+Desired output:
+
+```text
+nothing to commit, working tree clean
+```
+
+If not, then:
+
+```bash
+git add .
+git commit
+```
+
+Why?
+
+You don't want uncommitted changes floating around on your computer.
+
+<br>
+
+### STEP 2: Push your feature branch to the GitHub repository
+
+A Pull Request can only be created for code that exists on GitHub, so push to GitHub.
+
+If this is the very first push after you have created the feature branch, use:
+
+```bash
+git push -u origin username_feature_implementation
+```
+
+If not, it’s enough to use:
+
+```bash
+git push
+```
+
+Why?
+
+GitHub cannot review code that only exists on your laptop.
+
+<br>
+
+### STEP 3: Update your knowledge of the GitHub repository
+
+Fetch:
+
+```bash
+git fetch origin
+```
+
+Why?
+
+Perhaps Carlotta merged something into `refactor` while you were working.
+
+<br>
+
+### STEP 4: Check whether the refactor branch has changed
+
+Run:
+
+```bash
+git log --oneline HEAD..origin/refactor
+```
+
+If nothing appears:
+
+```text
+(no output)
+```
+
+Good.
+
+Proceed to STEP 6.
+
+If commits appear:
+
+```text
+abc123 Carlotta fixed parser
+def456 Carlotta improved validation
+```
+
+Then `refactor` changed while you were working. Go to STEP 5.
+
+<br>
+
+### STEP 5: Synchronize your local branch with the GitHub refactor branch
+
+Switch from your feature branch to the `refactor` branch:
+
+```bash
+git checkout refactor
+```
+
+Update the `refactor` branch:
+
+```bash
+git pull origin refactor
+```
+
+Switch back to your feature branch:
+
+```bash
+git checkout username_feature_implementation
+```
+
+Merge the `refactor` branch with your feature branch:
+
+```bash
+git merge refactor
+```
+
+Resolve conflicts if any appear.
+
+Test your feature branch again:
+
+```bash
+make
+```
+
+Or whatever testing procedure you use.
+
+Push your feature branch to GitHub again:
+
+```bash
+git push
+```
+
+Why?
+
+You want to know about conflicts before the Pull Request.
+Not after.
+
+<br>
+
+### STEP 6: Open GitHub
+
+Go to:
+
+```text
+https://github.com/RomanAlexandroff/push_swap
+```
+
+There, go to your feature branch:
+
+```text
+username_feature_implementation
+```
+
+<br>
+
+### STEP 7: Create your Pull Request
+
+GitHub will often show a big button:
+
+```text
+Compare & pull request
+```
+
+Click it.
+
+If it doesn't appear, click:
+
+```text
+Pull requests
+```
+
+Then:
+
+```text
+New pull request
+```
+
+<br>
+
+### STEP 8: Select Branches
+
+This step confuses many people, so be extra careful here.
+
+You will see something like:
+
+```text
+base: refactor
+compare: username_feature_implementation
+```
+
+Meaning:
+
+Take changes FROM:
+
+```text
+username_feature_implementation
+```
+
+Put them INTO:
+
+```text
+refactor
+```
+
+Double-check this carefully.
+
+You do NOT want:
+
+```text
+base: username_feature_implementation
+compare: refactor
+```
+
+That would be backwards!!!
+
+<br>
+
+### STEP 9: Review GitHub's Comparison
+
+GitHub now shows:
+
+* changed files
+* added lines
+* removed lines
+* commit history
+
+Review everything.
+
+Why?
+
+Sometimes you accidentally committed:
+
+```text
+.vscode
+temporary.txt
+random_test_file.c
+```
+
+This is your last chance to notice and remove unwanted files.
+
+<br>
+
+### STEP 10: Create Pull Request
+
+Click:
+
+```text
+Create Pull Request
+```
+
+Add title, for example:
+
+```text
+Implement parser validation
+```
+
+Add description, for example:
+
+```text
+Added validation for:
+- duplicate numbers
+- invalid integers
+- overflow cases
+
+Tested:
+- valid input
+- invalid input
+- edge cases
+```
+
+Click:
+
+```text
+Create Pull Request
+```
+
+Done. You’re amazing!
+
+The Pull Request now exists.
+
+<br>
+
+# What Happens Now?
+
+GitHub creates something like:
+
+```text
+Pull Request #7
+```
+
+This is basically a discussion page.
+
+Nothing has been merged yet.
+Nothing in `refactor` changes yet.
+
+<br>
+
+### STEP 11: Code Review
+
+Now Carlotta needs to review your code.
+
+On GitHub she opens:
+
+```text
+Pull Requests
+```
+
+Selects your Pull Request.
+
+She can inspect:
+
+```text
+Files changed
+```
+
+Every modified line is shown.
+
+She can leave comments such as:
+
+```text
+Could this pointer be NULL?
+```
+
+Or:
+
+```text
+Nice implementation.
+```
+
+<br>
+
+### STEP 12: Respond to the Code Review
+
+Let’s imagine that Carlotta found a bug in your implementation.
+
+You DO NOT create a new Pull Request.
+
+Instead, on your computer, you return to your feature branch:
+
+```bash
+git checkout username_feature_implementation
+```
+
+You fix the bug.
+
+You commit:
+
+```bash
+git add .
+git commit -m "fix parser edge case"
+```
+
+You push:
+
+```bash
+git push
+```
+
+Magic happens.
+
+The existing Pull Request updates automatically!
+
+GitHub adds the new commit to the Pull Request all by itself.
+
+<br>
+
+### STEP 13: Approval
+
+Eventually Carlotta decides:
+
+```text
+Looks good.
+```
+
+She approves the Pull Request.
+
+<br>
+
+### STEP 14: Merge Pull Request
+
+One of you opens the Pull Request. It does not matter if Roman does it or Carlotta does it.
+
+Then clicks:
+
+```text
+Merge pull request
+```
+
+Then clicks:
+
+```text
+Confirm merge
+```
+
+GitHub now automatically performs:
+
+```text
+username_feature_implementation
+        ↓
+     refactor
+```
+
+The feature is now inside `refactor`.
+
+<br>
+
+# What Happens To The Feature Branch?
+
+Usually GitHub asks:
+
+```text
+Delete branch
+```
+
+Click it.
+
+Why?
+
+The feature is finished.
+
+The feature branch has served its purpose.
+
+<br>
+
+### STEP 15: Synchronize your local repository with the GitHub repository
+
+Super important! Now your laptop still has the old view of the world.
+
+Update it!
+
+On your computer, switch to the `refactor` branch:
+
+```bash
+git checkout refactor
+```
+
+Fetch updates from GitHub:
+
+```bash
+git fetch origin
+```
+
+Update your local repository:
+
+```bash
+git merge origin/refactor
+```
+
+Or, instead of the fetch/update combination, simply call:
+
+```bash
+git pull origin refactor
+```
+
+Now your local `refactor` branch contains the merged feature.
+
+Should you notify other developers on the project to synchronize their local repositories with GitHub?
+
+Generally, no. If they follow the steps described in the “Typical Real-Life Work Day” as they should, they will get all of your updates themselves.
+
+<br>
+
+### STEP 16: Delete Local Feature Branch
+
+Feature completed.
+
+Delete the local feature branch on your computer:
+
+```bash
+git branch -d username_feature_implementation
+```
+Why?
+Keeps your branch list clean.
+
+<br>
+
+That is it.
+
+You have just successfully finished developing a feature and made your team leader extremely proud! Have yourself a break, relax. But then come back and start it all over again with the next feature.
+
+<br>
+
+<br>
+
+# Handling Conflicts
+
+Suppose Roman edits:
+
+```c
+parse_args();
+```
+
+Carlotta edits:
+
+```c
+parse_arguments();
+```
+
+Git cannot decide which function name to keep.
+When merging:
+```bash
+git merge refactor
+```
+Git reports conflict.
+Open file.
+
+You'll see:
+```text
+<<<<<<< HEAD
+parse_args();
+=======
+parse_arguments();
+>>>>>>> refactor
+```
+Choose correct code.
+Then:
+
+```bash
+git add filename.c
+git commit
+```
+Why?
+Git protects you from silently losing work.
+
+<br>
 
 <br>
 
